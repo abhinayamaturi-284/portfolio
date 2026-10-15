@@ -12,6 +12,7 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/maturi-abhinaya/",
   github: "https://github.com/abhinayamaturi-284",
   resumeUrl: "/portfolio/resume.pdf",
+  photo: "/portfolio/avatar.png",
 };
 
 export const about =

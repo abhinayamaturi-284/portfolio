@@ -64,22 +64,29 @@ function Hero() {
   return (
     <section id="home" className="hero">
       <div className="container hero__inner">
-        <p className="hero__eyebrow">Hello, I'm</p>
-        <h1 className="hero__name">{profile.name}</h1>
-        <h2 className="hero__title">{profile.title}</h2>
-        <p className="hero__tagline">{profile.tagline}</p>
-        <div className="hero__actions">
-          <a className="btn btn--primary" href="#contact">
-            Get in touch
-          </a>
-          <a className="btn btn--ghost" href={profile.resumeUrl} target="_blank" rel="noreferrer">
-            Download Resume
-          </a>
+        <div className="hero__text">
+          <p className="hero__eyebrow">Hello, I'm</p>
+          <h1 className="hero__name">{profile.name}</h1>
+          <h2 className="hero__title">{profile.title}</h2>
+          <p className="hero__tagline">{profile.tagline}</p>
+          <div className="hero__actions">
+            <a className="btn btn--primary" href="#contact">
+              Get in touch
+            </a>
+            <a className="btn btn--ghost" href={profile.resumeUrl} target="_blank" rel="noreferrer">
+              Download Resume
+            </a>
+          </div>
+          <div className="hero__social">
+            <a href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
+            <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href={`mailto:${profile.email}`}>Email</a>
+          </div>
         </div>
-        <div className="hero__social">
-          <a href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
-          <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href={`mailto:${profile.email}`}>Email</a>
+        <div className="hero__photo">
+          <div className="hero__photo-ring">
+            <img src={profile.photo} alt={profile.name} />
+          </div>
         </div>
       </div>
     </section>

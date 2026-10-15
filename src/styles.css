@@ -160,6 +160,48 @@ a {
 .hero__inner {
   position: relative;
   z-index: 1;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero__text {
+  min-width: 0;
+}
+
+.hero__photo {
+  display: flex;
+  justify-content: center;
+}
+
+.hero__photo-ring {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  padding: 6px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 20px 60px rgba(79, 140, 255, 0.25);
+}
+
+.hero__photo-ring::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, rgba(79, 140, 255, 0.25), transparent 60%);
+  z-index: -1;
+  transform: scale(1.25);
+}
+
+.hero__photo-ring img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background: var(--bg-elev);
+  display: block;
 }
 
 .hero__eyebrow {
@@ -660,7 +702,36 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    text-align: center;
+    padding-top: 90px;
+    padding-bottom: 40px;
+  }
+
+  .hero__photo {
+    order: -1;
+  }
+
+  .hero__photo-ring {
+    width: 220px;
+    height: 220px;
+  }
+
+  .hero__actions,
+  .hero__social {
+    justify-content: center;
+  }
+
   .section {
     padding: 64px 0;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 980px) {
+  .hero__photo-ring {
+    width: 240px;
+    height: 240px;
   }
 }

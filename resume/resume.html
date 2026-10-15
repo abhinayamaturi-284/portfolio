@@ -19,15 +19,34 @@
         font-size: 10.5pt;
         line-height: 1.4;
       }
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        border-bottom: 2px solid #0f2a52;
+        padding-bottom: 8px;
+      }
+      .header__text {
+        flex: 1;
+      }
+      .header__photo {
+        width: 92px;
+        height: 92px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2.5px solid #0f2a52;
+        flex-shrink: 0;
+      }
       .name {
-        text-align: center;
+        text-align: left;
         font-size: 21pt;
         font-weight: 700;
         letter-spacing: 0.5px;
         color: #0f2a52;
       }
       .contact {
-        text-align: center;
+        text-align: left;
         font-size: 9.5pt;
         color: #333;
         margin-top: 3px;
@@ -103,19 +122,24 @@
     </style>
   </head>
   <body>
-    <div class="name">MATURI SATVIKA NAGA ABHINAYA</div>
-    <div class="contact">
-      <a href="https://abhinayamaturi-284.github.io/portfolio/">Portfolio</a>
-      <span class="sep">|</span>
-      <a href="https://www.linkedin.com/in/maturi-abhinaya/">LinkedIn</a>
-      <span class="sep">|</span>
-      <a href="https://github.com/abhinayamaturi-284">GitHub</a>
-    </div>
-    <div class="contact">
-      Machilipatnam, India
-      <span class="sep">|</span> +91 90597 26789
-      <span class="sep">|</span>
-      <a href="mailto:abhinayamaturi@gmail.com">abhinayamaturi@gmail.com</a>
+    <div class="header">
+      <div class="header__text">
+        <div class="name">MATURI SATVIKA NAGA ABHINAYA</div>
+        <div class="contact">
+          <a href="https://abhinayamaturi-284.github.io/portfolio/">Portfolio</a>
+          <span class="sep">|</span>
+          <a href="https://www.linkedin.com/in/maturi-abhinaya/">LinkedIn</a>
+          <span class="sep">|</span>
+          <a href="https://github.com/abhinayamaturi-284">GitHub</a>
+        </div>
+        <div class="contact">
+          Machilipatnam, India
+          <span class="sep">|</span> +91 90597 26789
+          <span class="sep">|</span>
+          <a href="mailto:abhinayamaturi@gmail.com">abhinayamaturi@gmail.com</a>
+        </div>
+      </div>
+      <img class="header__photo" src="avatar_resume.png" alt="Maturi Abhinaya" />
     </div>
 
     <h2 class="section">Summary</h2>

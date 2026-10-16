@@ -45,26 +45,28 @@ head_left, head_right = min(lefts), max(rights)
 face_cx = (head_left + head_right) // 2
 head_w = head_right - head_left
 
-# Horizontal centre of the whole subject (use full-body extent, not just head).
+# Full subject bounding box (head-to-waist, across all detected rows).
 all_lefts = [row_extent[y][0] for y in row_extent]
 all_rights = [row_extent[y][1] for y in row_extent]
 body_left, body_right = min(all_lefts), max(all_rights)
-body_cx = (body_left + body_right) // 2
+body_top, body_bottom = head_top, max_y
+body_cx = (body_left + body_right) / 2.0
+body_cy = (body_top + body_bottom) / 2.0
+body_w = body_right - body_left
+body_h = body_bottom - body_top
 
-# Show head down to ~waist. Start a little above the head top for breathing room,
-# end near the lower torso. Make the crop a square large enough to fit that
-# vertical span so the circle shows head-to-waist.
-pad_top = int(subject_h * 0.04)
-crop_top = max(head_top - pad_top, 0)
-# Photo ends near the waist, so the lower torso is close to the subject bottom.
-crop_bottom = min(head_top + int(subject_h * 0.98), h)
-span = crop_bottom - crop_top
+# Build a SQUARE crop that fully contains the subject with even padding, and
+# is centred on the subject's midpoint. This guarantees the person sits in the
+# exact middle of the square (and therefore the circle).
+pad = 0.14  # breathing room around the subject
+crop = int(max(body_w, body_h) * (1 + pad))
 
-crop = span
-left = body_cx - crop // 2
-top = crop_top
-print(f"subject y[{head_top},{max_y}] head_w={head_w} body_cx={body_cx} "
-      f"crop={crop} box=({left},{top})")
+# Centre the crop on the subject midpoint. We allow the box to extend beyond the
+# image edges; out-of-bounds areas are filled with the gradient in composite().
+left = int(round(body_cx - crop / 2.0))
+top = int(round(body_cy - crop / 2.0))
+print(f"subject x[{body_left},{body_right}] y[{body_top},{body_bottom}] "
+      f"center=({body_cx:.0f},{body_cy:.0f}) crop={crop} box=({left},{top})")
 
 
 def build_background(size, top_rgb, bot_rgb):
@@ -82,7 +84,6 @@ def composite(size, top_rgb, bot_rgb, transparent_outside):
     grad = build_background(crop, top_rgb, bot_rgb)
     out = grad.copy()
     op = out.load()
-    cl, ct = max(left, 0), max(top, 0)
     for yy in range(crop):
         sy = top + yy
         if sy < 0 or sy >= h:

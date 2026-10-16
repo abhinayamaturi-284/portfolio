@@ -45,15 +45,26 @@ head_left, head_right = min(lefts), max(rights)
 face_cx = (head_left + head_right) // 2
 head_w = head_right - head_left
 
-# Vertical face centre ~ a little below head top (eye/nose line).
-face_cy = head_top + int(subject_h * 0.19)
+# Horizontal centre of the whole subject (use full-body extent, not just head).
+all_lefts = [row_extent[y][0] for y in row_extent]
+all_rights = [row_extent[y][1] for y in row_extent]
+body_left, body_right = min(all_lefts), max(all_rights)
+body_cx = (body_left + body_right) // 2
 
-# Tight square crop around the head so the face reads large and clear.
-crop = int(head_w * 1.55)
-left = face_cx - crop // 2
-top = face_cy - crop // 2
-print(f"subject y[{head_top},{max_y}] head_w={head_w} "
-      f"face=({face_cx},{face_cy}) crop={crop} box=({left},{top})")
+# Show head down to ~waist. Start a little above the head top for breathing room,
+# end near the lower torso. Make the crop a square large enough to fit that
+# vertical span so the circle shows head-to-waist.
+pad_top = int(subject_h * 0.04)
+crop_top = max(head_top - pad_top, 0)
+# Photo ends near the waist, so the lower torso is close to the subject bottom.
+crop_bottom = min(head_top + int(subject_h * 0.98), h)
+span = crop_bottom - crop_top
+
+crop = span
+left = body_cx - crop // 2
+top = crop_top
+print(f"subject y[{head_top},{max_y}] head_w={head_w} body_cx={body_cx} "
+      f"crop={crop} box=({left},{top})")
 
 
 def build_background(size, top_rgb, bot_rgb):

@@ -110,12 +110,16 @@ def composite(size, top_rgb, bot_rgb, transparent_outside):
     return canvas
 
 
-# Website: cool professional blue-gray gradient, transparent outside circle.
-web = composite(512, (228, 236, 248), (196, 211, 235), transparent_outside=True)
+# Shared gradient so the website and resume avatars look identical.
+GRAD_TOP = (237, 241, 249)
+GRAD_BOT = (212, 223, 240)
+
+# Website: same gradient, transparent outside the circle (sits on the dark theme).
+web = composite(512, GRAD_TOP, GRAD_BOT, transparent_outside=True)
 web.save("public/avatar.png")
 
-# Resume: soft neutral gradient, white outside circle for the PDF.
-res = composite(400, (237, 241, 249), (212, 223, 240), transparent_outside=False)
+# Resume: same gradient, white outside the circle for the PDF.
+res = composite(400, GRAD_TOP, GRAD_BOT, transparent_outside=False)
 res.convert("RGB").save("resume/avatar_resume.png", quality=95)
 
 print("saved public/avatar.png and resume/avatar_resume.png")

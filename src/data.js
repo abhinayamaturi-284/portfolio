@@ -21,7 +21,7 @@ export const about =
 export const skills = [
   {
     category: "Languages",
-    items: ["JavaScript (ES6+)", "Java", "SQL", "HTML5", "CSS3"],
+    items: ["JavaScript", "Java", "SQL", "HTML5", "CSS3"],
   },
   {
     category: "Frameworks & Libraries",
@@ -29,7 +29,7 @@ export const skills = [
   },
   {
     category: "Tools & Platforms",
-    items: ["Git", "GitHub", "AWS", "Vite"],
+    items: ["Git", "GitHub"],
   },
 ];
 
